@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopaster 9</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+    <script src="script.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #2d2626;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1b1a1a;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .copyrighta {
+            color: white;
+            text-decoration: none;
+        }
+        .container {
+            padding: 20px;
+            gap: 20px;
+            margin-top: 60px; /* To avoid overlap with the fixed nav */
+        }
+        .top-left, .top-right, .bottom-left, .bottom-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .folder {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0; /* No margin between apps */
+            background-color: #3a3a3a;
+            border-radius: 10px;
+            overflow: hidden; /* Ensure the folder looks like one square */
+        }
+        .app {
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .weather-widget {
+            background-color: #3a3a3a;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .weather-widget i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .empty-div {
+            background-color: #3a3a3a;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        footer {
+            background-color: #1b1a1a;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .footer-app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+        .footer-app img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 5px;
+        }
+        .footer-app span {
+            font-size: 0.9rem;
+        }
+        .appicon {
+            height: 100px;
+            width: 100px;
+            color: #fff;
+            border-radius: 15px;
+        }
+        .appname {
+            color: #fff;
+        }
+        .appgoing {
+            text-decoration: none;
+            color: #fff;
+        }
+        .appicon:hover {
+            transform: scale(1.05);
+            transition: 0.3s;
+        }
+        .fa-star {
+            color: #fff;
+            font-size: 325px;
+        }
+
+        /* Responsive Design for Mobile */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: row;
+                padding: 10px;
+                gap: 10px;
+                margin-top: 50px;
+            }
+            .top-left, .top-right, .bottom-left, .bottom-right {
+                width: 50%;
+            }
+            .folder, .app-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .appicon {
+                height: 50px;
+                width: 50px;
+                padding : 0;
+                margin : 0;
+            }
+            .fa-star {
+                font-size: 200px;
+            }
+            footer {
+                padding: 5px;
+            }
+            .footer-app img {
+                width: 30px;
+                height: 30px;
+                border-radius: 15px;
+            }
+            .footer-app span {
+                font-size: 0.8rem;
+            }
+            .container div {
+                padding : 0;
+                margin: 0;
+                margin : 5px
+            }
+            .container {
+                display : flex;
+            }
+            .fa-star {
+                font-size : 120px;
+            }
+            .toptop {
+                display : flex;
+            }
+            .top , .bottom {
+                display: flex;
+            }
+            .container {
+    display: flex;
+    flex-direction: column; /* Stack top and bottom */
+    gap: 20px; /* Space between top and bottom sections */
+    padding: 20px;
+    margin-top: 60px;
+}
+
+/* Ensures Top and Bottom Sections are Side-by-Side */
+.top, .bottom {
+    display: flex;
+    justify-content: space-between; /* Distribute evenly */
+    width: 100%;
+}
+
+/* Ensure Both Sides Take Equal Space */
+.top-left, .top-right, .bottom-left, .bottom-right {
+    width: 48%; /* Adjust to fit within row */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/*media end*/
+
+        .top-left, .top-right, .bottom-left, .bottom-right {
+            width: 50%;
+            display: grid;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .top , .bottom {
+            display: grid;
+        }
+        .container {
+    display: grid;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    margin-top: 60px;
+}
+
+/* Top and Bottom Containers in a Row */
+.top, .bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Ensure Equal Width */
+.top-left, .top-right, .bottom-left, .bottom-right {
+    width: 48%; /* Adjust width to fit within row */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+    </style>
+</head>
+<body>
+    <nav>
+        <span class="time">12:00 PM</span>
+        <a href="navpages/pi6.html" class="copyrighta"><span class="copyright">Pi6</span></a>
+        <div>
+            <a href="" class="navis"><i class="home fa-solid fa-house"></i></a>
+            <a href="navpages/wifi/wifi.html" class="navis"><i class="wifi fa-solid fa-wifi"></i></a>
+            <a href="navpages/battery.html" class="navis"><i class="charge fa-solid fa-battery-full"></i><span class="battery-info" id="batteryChargeNav"></span></a>
+            <a href="navpages/" class="navis"><i class="datai fa-solid fa-signal"></i></a>
+            <a href="navpages/" class="navis awl"><i class="donotdisturb fa-solid fa-circle-minus"></i></a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Top Left: Folder with 4 Apps (2x2 Grid, no margin) -->
+        <div class="top">
+            <div class="top-left">
+                <div class="folder">
+                    <div class="app"><a href="https://www.instagram.com" class="appgoing"><img src="https://cdn.glitch.global/f8993f85-34ef-4d5f-9a47-76bf6c84437b/insta.png?v=1742678671875" class="appicon"><span class="appname">Instagram</span></a></div>
+                    <div class="app"><a href="https://www.google.com" class="appgoing"><img src="https://cdn.glitch.global/f8993f85-34ef-4d5f-9a47-76bf6c84437b/chrome.png?v=1742677930449" class="appicon"><span class="appname">Chrome</span></a></div>
+                    <div class="app"><a href="https://www.discord.app" class="appgoing"><img src="https://cdn.glitch.global/f8993f85-34ef-4d5f-9a47-76bf6c84437b/pngwing.com%20(17).png?v=1742679490447" class="appicon"><span class="appname">Discord</span></a></div>
+                    <div class="app"><a href="https://www.tiktok.com" class="appgoing"><img src="https://cdn.glitch.global/f8993f85-34ef-4d5f-9a47-76bf6c84437b/pngwing.com%20(18).png?v=1742679335613" class="appicon"><span class="appname">Tiktok</span></a></div>
+                </div>
+            </div>
+    
+            <!-- Top Right: 4 Apps (2x2 Grid) -->
+            <div class="top-right">
+                <div class="app-grid">
+                    <div class="app"><a href="https://www.x.com" class="appgoing"><img src="https://cdn.glitch.global/f8993f85-34ef-4d5f-9a47-76bf6c84437b/twitter.png?v=1742679732987" alt="" class="appicon"><span class="appname">X</span></a></div>
+                    <div class="app"><a href="" class="appgoing"><img src="https://cdn.glitch.global/c595faff-798c-449a-b5df-68c10510e96a/pngwing.com%20(9).png?v=1739542098528" alt="" class="appicon"><span class="appname">AI</span></a></div>
+                    <div class="app"><a href="" class="appgoing"><img src="https://cdn.glitch.global/f8993f85-34ef-4d5f-9a47-76bf6c84437b/pngwing.com%20(19).png?v=1742679973703" alt="" class="appicon"><span class="appname">Office</span></a></div>
+                    <div class="app"><a href="" class="appgoing"><img src="https://cdn.glitch.global/c595faff-798c-449a-b5df-68c10510e96a/pngwing.com%202%20(8).png?v=1739540482728" alt="" class="appicon"><span class="appname">Calculator</span></a></div>
+                </div>
+            </div><br>
+           <div class="bottom">
+             <!-- Bottom Left: Empty Div -->
+             <div class="bottom-left">
+                <i class="fa-solid fa-star"></i>
+            </div>
+    
+        </div>
+        <!-- Bottom Right: Weather Widget -->
+        <div class="bottom-right">
+            <div class="weather-widget" id="weatherWidget">
+                <i class="fa-solid fa-sun" style="color : #ff0;"></i>
+                <p>Loading weather...</p>
+            </div>
+        </div>
+    </div>
+           </div>
+
+    <!-- Footer with Apps -->
+    <footer>
+        <a href="https://www.instagram.com" class="footer-app">
+            <img src="https://cdn.glitch.global/f8993f85-34ef-4d5f-9a47-76bf6c84437b/insta.png?v=1742678671875" alt="Instagram">
+            <span>Instagram</span>
+        </a>
+        <a href="https://www.google.com" class="footer-app">
+            <img src="https://cdn.glitch.global/f8993f85-34ef-4d5f-9a47-76bf6c84437b/chrome.png?v=1742677930449" alt="Chrome">
+            <span>Chrome</span>
+        </a>
+        <a href="" class="footer-app">
+           <div class="circleshape">
+                <i class="ri-layout-grid-2-fill"></i>
+                <i class="ri-grid-fill"></i>
+            </div>
+        </a>
+        <style>
+            .circleshape {
+                width: 40px;
+                height: 40px;
+                background-color: #fff;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .ri-layout-grid-2-fill ,.ri-grid-fill {
+                color: #000;
+                font-size: 2rem;
+            }
+        </style>
+        <a href="https://www.discord.app" class="footer-app">
+            <img src="https://cdn.glitch.global/f8993f85-34ef-4d5f-9a47-76bf6c84437b/pngwing.com%20(17).png?v=1742679490447" alt="Discord">
+            <span>Discord</span>
+        </a>
+        <a href="https://www.tiktok.com" class="footer-app">
+            <img src="https://cdn.glitch.global/f8993f85-34ef-4d5f-9a47-76bf6c84437b/pngwing.com%20(18).png?v=1742679335613" alt="Tiktok">
+            <span>Tiktok</span>
+        </a>
+    </footer>
+<style>
+    .footer-app img {
+        width: 40px;
+        height: 40px;
+        border-radius: 15%;
+    }
+
+    @media (max-width: 768px) {
+            .container {
+    display: flex;
+    flex-direction: column; /* Stack top and bottom */
+    gap: 20px; /* Space between top and bottom sections */
+    padding: 20px;
+    margin-top: 60px;
+}
+
+/* Ensure Top and Bottom are in Separate Rows */
+.top, .bottom {
+    display: flex;
+    flex-direction: column; /* Stack elements inside */
+    width: 100%;
+}
+
+/* Ensure Both Sides Take Equal Space */
+.top-left, .top-right, .bottom-left, .bottom-right {
+    width: 100%; /* Full width to stack */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+    }
+
+    /* Make the app name appear below the icon */
+.appgoing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.appname {
+    margin-top: 5px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: white;
+}
+
+/* Ensure top-right is next to top-left and bottom-right next to bottom-left */
+.top, .bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.top-left, .top-right, .bottom-left, .bottom-right {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .top, .bottom {
+        flex-direction: column; /* Stack on small screens */
+    }
+
+    .top-left, .top-right, .bottom-left, .bottom-right {
+        width: 50%;
+        display : block;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .top {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        gap: 20px; /* Add gap between top-left and top-right */
+    }
+    .top-left, .top-right {
+        flex: 1; /* Equal width */
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+}
+
+/* Ensure top-right is next to top-left and bottom-right next to bottom-left */
+.top, .bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Make left and right sections take equal space */
+.top-left, .top-right, .bottom-left, .bottom-right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+
+
+
+</style>
+    <script>
+
+            // Access the battery charge and update the #batterycharge and #batteryChargeNav elements
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(function(battery) {
+                    // Function to update battery charge
+                    const updateBatteryCharge = () => {
+                        const batteryLevel = Math.round(battery.level * 100); // Convert to percentage
+                        document.getElementById('batterycharge').textContent = `${batteryLevel}%`;
+                        document.getElementById('batteryChargeNav').textContent = `${batteryLevel}%`;
+                    };
+    
+                    // Initial update
+                    updateBatteryCharge();
+    
+                    // Listen for changes in battery level
+                    battery.addEventListener('levelchange', updateBatteryCharge);
+    
+                    // Listen for changes in charging status
+                    battery.addEventListener('chargingchange', () => {
+                        const chargingStatus = battery.charging ? ' (Charging)' : ' (Not Charging)';
+                        document.getElementById('batterycharge').textContent += chargingStatus;
+                        document.getElementById('batteryChargeNav').textContent += chargingStatus;
+                    });
+                }).catch(function(error) {
+                    console.error('Battery Status API error:', error);
+                    document.getElementById('batterycharge').textContent = 'Battery info unavailable';
+                    document.getElementById('batteryChargeNav').textContent = 'Battery info unavailable';
+                });
+            } else {
+                // Fallback if Battery Status API is not supported
+                document.getElementById('batterycharge').textContent = 'Battery Status API not supported';
+                document.getElementById('batteryChargeNav').textContent = 'Battery Status API not supported';
+            }
+    </script>
+</body>
+</html>
