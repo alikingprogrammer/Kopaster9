@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopaster 9</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+    <script src="../../script.js"></script>
+    <style>
+        body {
+            background-color: #2d2626;
+            font-family: Arial, sans-serif;
+        }
+        .wifi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        .wifi-content {
+            padding: 10px;
+        }
+        h2 {
+            font-family: poppins;
+            padding-left: 10px;
+        }
+        .wifi-header i {
+            color: white;
+            font-size: 20px;
+            padding: 10px;
+        }
+        * {
+            font-family: poppins;
+        }
+        li {
+            list-style: none;
+            background-color: #1b1a1a;
+            height : 50px;
+            padding: 10px;
+            border-radius: 15px;
+            width : 90vw;
+        }
+        .reload {
+            margin-right: 20px;
+        }
+        .wificonnectionsd {
+            color: white;
+            font-size: 20px;
+            padding: 10px;
+        }
+        @media (max-width:767px) {
+            li {
+                width : 80vw;
+                padding:0 ;
+                margin:0 ;
+                padding : 10px;
+                margin-left: -25px;
+            }
+        }
+        li i {
+            font-size: 30px;
+        }
+        a {
+            text-decoration: none;
+        }
+        li a  , p{
+            color : #fff;
+        }
+        .networka {
+            color: #fff;
+            font-size: 20px;
+        }
+        .pnetworka {
+            color: #fff;
+            font-size: 15px;
+        }
+        #myNetworkList {
+            padding-bottom: 10px;
+            display:flow-root;
+        } 
+        .pswd {
+            color : #fff;
+        }
+        button {
+            margin-right: 5px;
+            border-radius: 15px;
+            color : rgb(230, 51, 51);
+            border: none;
+            outline: none;
+            background-color: black;
+            padding: 5px;
+        }
+        .btna {
+            color : #e63333;
+            text-decoration: none;
+        }
+        #pswdinputid {
+            width: 80vw;
+            padding: 10px;
+            outline: none;
+            background: transparent;
+            color: white;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            border-bottom: 2px solid #e63333;
+        }
+        .result {
+            color: white;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 767px) {
+            
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <span class="time">12:00 PM</span>
+        <a href="../pi6.html" class="copyrighta" style="color : #fff"><span class="copyright">Pi6</span></a>
+
+
+        <div>
+            <a href="../../index.html" class="navis"><i class="home fa-solid fa-house"></i></a>
+            <a href="wifi.html" class="navis"><i class="wifi fa-solid fa-wifi"></i></a>
+            <a href="../battery.html" class="navis"><i class="charge fa-solid fa-battery-full"></i><span class="battery-info" id="batteryChargeNav"></span></a>
+            <a href="" class="navis"><i class="datai fa-solid fa-signal"></i></a>
+            <a href="" class="navis awl"><i class="donotdisturb fa-solid fa-circle-minus"></i></a>
+        </div>
+    <br>
+
+    </nav>
+    <div class="wifi">
+        <div class="wifi-header">
+            <h2>fastlink-2132<h2>
+            <a href="" class="reload"><i class="fa-solid fa-rotate-right"></i></a>
+        </div>
+        <div class="wifi-content">
+            <div class="inputps">
+                <div class="pswd">
+                    <label for="password">Password:</label>
+                </div>
+                <input type="text" name="" id="pswdinputid">
+            </div><br>
+            <!-- Result Message -->
+            <div class="result" id="resultMessage"></div>
+            <div class="BTN">
+                <button class="cancel"><a href="wifi.html" class="btna">Cancel</a></button>
+                <button class="connect"><a href="wifi.html" class="btna">Connect</a></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get references to the password input and result message elements
+        const passwordInput = document.getElementById('pswdinputid');
+        const resultMessage = document.getElementById('resultMessage');
+
+        // Listen for input changes in the password field
+        passwordInput.addEventListener('input', function () {
+            const password = passwordInput.value.trim(); // Get the trimmed value of the input
+
+            // Check if the password matches the expected value
+            if (password === 'mister55') {
+                resultMessage.textContent = 'Connected'; // Display "Connected"
+                resultMessage.style.color = 'green'; // Change text color to green
+            } else {
+                resultMessage.textContent = 'Failed'; // Display "Failed"
+                resultMessage.style.color = 'red'; // Change text color to red
+            }
+        });
+
+            // Access the battery charge and update the #batterycharge and #batteryChargeNav elements
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(function(battery) {
+                    // Function to update battery charge
+                    const updateBatteryCharge = () => {
+                        const batteryLevel = Math.round(battery.level * 100); // Convert to percentage
+                        document.getElementById('batterycharge').textContent = `${batteryLevel}%`;
+                        document.getElementById('batteryChargeNav').textContent = `${batteryLevel}%`;
+                    };
+    
+                    // Initial update
+                    updateBatteryCharge();
+    
+                    // Listen for changes in battery level
+                    battery.addEventListener('levelchange', updateBatteryCharge);
+    
+                    // Listen for changes in charging status
+                    battery.addEventListener('chargingchange', () => {
+                        const chargingStatus = battery.charging ? ' (Charging)' : ' (Not Charging)';
+                        document.getElementById('batterycharge').textContent += chargingStatus;
+                        document.getElementById('batteryChargeNav').textContent += chargingStatus;
+                    });
+                }).catch(function(error) {
+                    console.error('Battery Status API error:', error);
+                    document.getElementById('batterycharge').textContent = 'Battery info unavailable';
+                    document.getElementById('batteryChargeNav').textContent = 'Battery info unavailable';
+                });
+            } else {
+                // Fallback if Battery Status API is not supported
+                document.getElementById('batterycharge').textContent = 'Battery Status API not supported';
+                document.getElementById('batteryChargeNav').textContent = 'Battery Status API not supported';
+            }
+    </script>
+</body>
+</html>
